@@ -10,6 +10,11 @@ class MOG {
 public:
     MOG();
     void train(std::vector<cv::Mat>& training_images , std::vector<cv::Mat> &masks);
+    void test(std::vector<cv::Mat>& test_images);
+    void test2(std::vector<cv::Mat>& test_images);
+    cv::EM* pos_model;
+    cv::EM* neg_model;
+    std::vector<cv::Mat> test_result;
     ~MOG();
 private:
     void organizeSamples(std::vector<cv::Mat> &imgs,
@@ -20,6 +25,8 @@ private:
                           const cv::Mat& mask,
                           std::vector<double> &pos_samples,
                           std::vector<double> &neg_samples );
+    void test_image(cv::Mat& img, cv::Mat& dst, cv::EM &model);
+    void test_image2(cv::Mat& img, cv::Mat& dst);
 };
 
 #endif // MOG_H

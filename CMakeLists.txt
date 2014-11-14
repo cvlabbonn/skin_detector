@@ -44,8 +44,10 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 set(VIEWER_SOURCES
     src/main.cpp
     src/control.cpp
+    src/imageviewer.cpp
     src/mog.cpp
     src/mog_train.cpp
+    src/mog_test.cpp
     src/viewer.cpp
     src/viewer_error.cpp
     src/viewer_visualizer.cpp
@@ -58,10 +60,14 @@ set(VIEWER_SOURCES
 # set QT headers
 SET(QT_HEADERS
     include/control.h
+    include/imageviewer.h
     )
 
 #set QT forms
-SET(QT_FORMS ui/control.ui)
+SET(QT_FORMS
+    ui/control.ui
+    ui/imageviewer.ui
+)
 
 # create moc for QT
 QT4_WRAP_CPP(QT_MOC ${QT_HEADERS})

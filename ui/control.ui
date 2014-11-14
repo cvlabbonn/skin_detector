@@ -336,7 +336,7 @@
      <string>Load Models</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="record_button">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -349,7 +349,7 @@
      <string>record</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="stop_record_button">
     <property name="geometry">
      <rect>
       <x>610</x>
@@ -362,7 +362,7 @@
      <string>stop</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="view_record_button">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -375,7 +375,7 @@
      <string>view record</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="save_record_button">
     <property name="geometry">
      <rect>
       <x>610</x>

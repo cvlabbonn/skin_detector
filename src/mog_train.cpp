@@ -3,16 +3,18 @@
 
 void MOG::train( std::vector<cv::Mat>& training_images, std::vector<cv::Mat>& masks ){
     cv::Mat pos_samples, neg_samples;
-    const cv::TermCriteria criteria(cv::TermCriteria::COUNT+cv::TermCriteria::EPS, 10, FLT_EPSILON);
-    cv::EM pos_model(cv::EM::DEFAULT_NCLUSTERS, cv::EM::COV_MAT_DIAGONAL, criteria);
-    cv::EM neg_model(cv::EM::DEFAULT_NCLUSTERS, cv::EM::COV_MAT_DIAGONAL, criteria);
 
+
+    std::cout << "Organizing the data" << std::endl;
     // organize all the samples
     organizeSamples(training_images, masks, pos_samples, neg_samples);
 
+    std::cout << "Training the models, this may take a while" << std::endl;
     // train the models
-    pos_model.train( pos_samples );
-    neg_model.train( neg_samples );
+    pos_model->train( pos_samples );
+    neg_model->train( neg_samples );
+
+    std::cout << "Finished training the models" << std::endl;
 
 }
 
