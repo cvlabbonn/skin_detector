@@ -20,6 +20,9 @@ void Viewer::error_manager(int error, bool critical){
     case 6:
         printf("Color stream could not start:\n%s\n", openni::OpenNI::getExtendedError());
         break;
+    case 7:
+        std::cout << "No camera detected" << std::endl;
+        break;
     default:
         printf("An error occurred:\n%s\n", openni::OpenNI::getExtendedError());
     }

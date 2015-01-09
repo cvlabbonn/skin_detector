@@ -5,6 +5,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/ml/ml.hpp>
+#include <mixture.h>
+#include <QSettings>
 
 class MOG {
 public:
@@ -15,7 +17,12 @@ public:
     cv::EM* pos_model;
     cv::EM* neg_model;
     std::vector<cv::Mat> test_result;
+    std::vector<Mixture> posMixtureModels;
+    std::vector<Mixture> negMixtureModels;
+    void save(std::string filename);
+    void load(std::string filename);
     ~MOG();
+    void emToMixture();
 private:
     void organizeSamples(std::vector<cv::Mat> &imgs,
                           std::vector<cv::Mat> &masks,
@@ -27,6 +34,10 @@ private:
                           std::vector<double> &neg_samples );
     void test_image(cv::Mat& img, cv::Mat& dst, cv::EM &model);
     void test_image2(cv::Mat& img, cv::Mat& dst);
+    void compute_SkinnBinMap_4_Image( const cv::Mat &rgb, /*const cv::Mat &depth,*/ cv::Mat &result ,double threshold, bool skipInvalidDepthFLAG/*, bool printFLAG*/ );
+    void compute_LogRatioMap_4_Image( const cv::Mat &rgb, /*const cv::Mat &depth,*/ cv::Mat &result/*, bool skipInvalidDepthFLAG*/);
+    double compute_LogRatioMap_4_Pixel( const cv::Vec3b pixelBGR);
+
 };
 
 #endif // MOG_H

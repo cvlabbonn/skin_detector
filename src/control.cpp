@@ -103,24 +103,43 @@ void Control::on_view_record_button_clicked()
 
 void Control::on_save_model_button_clicked()
 {
-    cv::FileStorage fs_pos("pos_model.xml", cv::FileStorage::WRITE);
-    mog->pos_model->write(fs_pos);
-    fs_pos.release();
-    cv::FileStorage fs_neg("neg_model.xml", cv::FileStorage::WRITE);
-    mog->pos_model->write(fs_neg);
-    fs_neg.release();
+//    cv::FileStorage fs_pos("pos_model.xml", cv::FileStorage::WRITE);
+//    mog->pos_model->write(fs_pos);
+//    fs_pos.release();
+//    cv::FileStorage fs_neg("neg_model.xml", cv::FileStorage::WRITE);
+//    mog->pos_model->write(fs_neg);
+//    fs_neg.release();
+    QDir basedir = QDir(QApplication::applicationDirPath());
+    basedir.cdUp();
+    basedir.cd("config");
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Open File"),
+                                                    basedir.absolutePath()+"/models.ini",
+                                                    tr("Config file (*.ini)"));
+    mog->save(fileName.toStdString());
+    QMessageBox messageBox;
+    messageBox.information(this, "Models saved", "The current mixture models have been saved.");
 }
 
 void Control::on_load_model_button_clicked()
 {
-    cv::FileStorage fs_pos("pos_model.xml", cv::FileStorage::READ);
-    const cv::FileNode& fn_pos = fs_pos["StatModel.EM"];
-    mog->pos_model->read(fn_pos);
-    fs_pos.release();
-    cv::FileStorage fs_neg("neg_model.xml", cv::FileStorage::READ);
-    const cv::FileNode& fn_neg = fs_neg["StatModel.EM"];
-    mog->pos_model->read(fn_neg);
-    fs_neg.release();
+//    cv::FileStorage fs_pos("pos_model.xml", cv::FileStorage::READ);
+//    const cv::FileNode& fn_pos = fs_pos["StatModel.EM"];
+//    mog->pos_model->read(fn_pos);
+//    fs_pos.release();
+//    cv::FileStorage fs_neg("neg_model.xml", cv::FileStorage::READ);
+//    const cv::FileNode& fn_neg = fs_neg["StatModel.EM"];
+//    mog->neg_model->read(fn_neg);
+//    fs_neg.release();
+//    mog->emToMixture();
+    QDir basedir = QDir(QApplication::applicationDirPath());
+    basedir.cdUp();
+    basedir.cd("config");
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                    basedir.absolutePath()+"/models.ini",
+                                                    tr("Config file (*.ini)"));
+    mog->load(fileName.toStdString());
+    QMessageBox messageBox;
+    messageBox.information(this, "Models loaded", "The mixture models have been loaded.");
 }
 
 void Control::on_record_button_clicked()

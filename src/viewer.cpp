@@ -20,6 +20,11 @@ void Viewer::initialize(){
     if ( rc != openni::STATUS_OK )
         error_manager( 1 );
 
+    openni::Array<openni::DeviceInfo> dev_inf;
+    openni::OpenNI::enumerateDevices(&dev_inf);
+    if (dev_inf.getSize() == 0){
+        error_manager( 7, true );
+    }
 
     rc = device.open( openni::ANY_DEVICE );
     if ( rc != openni::STATUS_OK )

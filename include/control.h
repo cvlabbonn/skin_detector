@@ -7,7 +7,7 @@
 #include <mog.h>
 #include <QMessageBox>
 #include <QSettings>
-#include <QDebug>
+#include <QFileDialog>
 #include <opencv2/core/core.hpp>
 
 

@@ -46,14 +46,17 @@ set(VIEWER_SOURCES
     src/control.cpp
     src/imageviewer.cpp
     src/mog.cpp
+    src/mog_io.cpp
     src/mog_train.cpp
     src/mog_test.cpp
+    src/mixture.cpp
     src/viewer.cpp
     src/viewer_error.cpp
     src/viewer_visualizer.cpp
     src/viewer_keyio.cpp
     include/mog.h
     include/viewer.h
+    include/mixture.h
 )
 
 

@@ -14,6 +14,7 @@ void MOG::train( std::vector<cv::Mat>& training_images, std::vector<cv::Mat>& ma
     pos_model->train( pos_samples );
     neg_model->train( neg_samples );
 
+    emToMixture();
     std::cout << "Finished training the models" << std::endl;
 
 }
@@ -55,9 +56,9 @@ void MOG::organizeSample( const cv::Mat& img,
     for ( int yyy = 0; yyy < img.rows; yyy++ ) {
         for ( int xxx = 0; xxx < img.cols; xxx++ ) {
             // 3 channel pixel to 1x3 mat
-            sample[0] = img.at<cv::Vec3b>( yyy, xxx ) ( 0 );
+            sample[0] = img.at<cv::Vec3b>( yyy, xxx ) ( 2 );
             sample[1] = img.at<cv::Vec3b>( yyy, xxx ) ( 1 );
-            sample[2] = img.at<cv::Vec3b>( yyy, xxx ) ( 2 );
+            sample[2] = img.at<cv::Vec3b>( yyy, xxx ) ( 0 );
 
             // appends 3 elements (of 3 channels)
             // at the end of *pos* or *neg*
