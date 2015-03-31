@@ -25,6 +25,7 @@ private:
     void closeEvent(QCloseEvent *);
     void loadImage(cv::Mat image = cv::Mat());
     void changeCounter();
+    void threshold_image(cv::Mat& image);
 signals:
     void closeWindow();
 private slots:

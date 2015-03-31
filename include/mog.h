@@ -20,7 +20,7 @@ public:
     std::vector<Mixture> posMixtureModels;
     std::vector<Mixture> negMixtureModels;
     void save(std::string filename);
-    void load(std::string filename);
+    bool load(std::string filename);
     ~MOG();
     void emToMixture();
 private:

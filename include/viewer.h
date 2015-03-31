@@ -21,11 +21,14 @@ public:
     bool save_memory;
 
     Viewer();
-    void initialize();
+    bool initialize();
     int loop();
     std::vector<cv::Mat> rgb_images;
     std::vector<cv::Mat> depth_images;
     ~Viewer();
+    void shutdownCameras();
+    void reset();
+    void key_parse(char key);
 private:
     void error_manager( int error_type , bool critical=false);
     openni::Status rc;
@@ -36,7 +39,7 @@ private:
 
     bool only_depth;
     void createRGBD(cv::Mat& depth_mat, cv::Mat& color_mat, cv::Mat& dst_rgbd, cv::Mat& dst_depth);
-    void key_parse(char key);
+
 };
 
 #endif // VIEWER_H

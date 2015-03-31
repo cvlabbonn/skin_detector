@@ -23,7 +23,10 @@ void ImageViewer::loadImage(cv::Mat image){
         QImage qt_img;
         cv::Mat current_img;
         if (image.empty()){
-            current_img = images[frame];
+            current_img = images[frame].clone();
+            if (ui->threshold_check->isChecked()){
+                threshold_image(current_img);
+            }
         } else {
             current_img = image;
         }
@@ -68,15 +71,24 @@ void ImageViewer::on_threshold_slider_valueChanged(int value)
 {
     ui->threshold_label->setText(QString::number(value));
     cv::Mat current = images[frame].clone();
-    if(current.type() == CV_8UC3){
-        cv::cvtColor( current, current, CV_BGR2GRAY );
-    }
-    cv::threshold(current, current, (double)value, 255, cv::THRESH_BINARY);
+    threshold_image(current);
     loadImage(current);
+}
+
+void ImageViewer::threshold_image(cv::Mat& image){
+    if(image.type() == CV_8UC3){
+        cv::cvtColor( image, image, CV_BGR2GRAY );
+    }
+    cv::threshold(image, image, (double)ui->threshold_slider->value(), 255, cv::THRESH_BINARY);
 }
 
 void ImageViewer::on_threshold_check_toggled(bool checked)
 {
     ui->threshold_slider->setEnabled(checked);
     ui->threshold_label->setEnabled(checked);
+    if (checked){
+        on_threshold_slider_valueChanged(ui->threshold_slider->value());
+    } else {
+        loadImage();
+    }
 }

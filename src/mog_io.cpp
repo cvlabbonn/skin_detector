@@ -80,13 +80,13 @@ void MOG::save(std::string filename){
     settings.endGroup();
 }
 
-void MOG::load(std::string filename){
+bool MOG::load(std::string filename){
     QSettings settings( QString::fromStdString(filename), QSettings::IniFormat );
     settings.beginGroup( "PositiveModel" );
     int size = settings.beginReadArray("means");
     if (size == 0){
         std::cout << "Nothing to load in the file" << std::endl;
-        return;
+        return false;
     }
     // resize the mixture vectors
     posMixtureModels.resize(size);
@@ -149,5 +149,6 @@ void MOG::load(std::string filename){
     }
     settings.endArray();
     settings.endGroup();
+    return true;
 
 }

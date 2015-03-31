@@ -29,6 +29,7 @@ public:
     ImageViewer* img_viewer;
 
 private:
+    bool trained;
     void closeEvent(QCloseEvent *event);
     void trainMoG();
 
@@ -60,6 +61,10 @@ private slots:
     void on_stop_record_button_clicked();
 
     void on_test_button_clicked();
+
+    void on_start_camera_clicked();
+
+    void on_stop_camera_clicked();
 
 private:
     Ui::Control *ui;
