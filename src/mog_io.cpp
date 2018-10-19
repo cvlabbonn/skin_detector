@@ -2,25 +2,27 @@
 
 void MOG::emToMixture(){
     // get mixture variables from the EM models
-    const cv::Mat pos_means = pos_model->get<cv::Mat>("means");
-    const cv::Mat neg_means = neg_model->get<cv::Mat>("means");
-    const cv::Mat pos_weights = pos_model->get<cv::Mat>("weights");
-    const cv::Mat neg_weights = neg_model->get<cv::Mat>("weights");
-    const std::vector<cv::Mat> pos_covs = pos_model->get< std::vector<cv::Mat> >("covs");
-    const std::vector<cv::Mat> neg_covs = neg_model->get< std::vector<cv::Mat> >("covs");
+  const cv::Mat pos_means = pos_model->getMeans();
+  const cv::Mat neg_means = neg_model->getMeans();
+  const cv::Mat pos_weights = pos_model->getWeights();
+  const cv::Mat neg_weights = neg_model->getWeights();
+  std::vector<cv::Mat> pos_covs;
+  std::vector<cv::Mat> neg_covs;
+  pos_model->getCovs(pos_covs);
+  neg_model->getCovs(neg_covs);
 
-    // resize the mixture vectors
-    posMixtureModels.resize(pos_weights.cols);
-    negMixtureModels.resize(neg_weights.cols);
-    // add the data to the mixture models
-    for(int i = 0; i < (int) pos_weights.cols; i++){
-        pos_means.row(i).copyTo(posMixtureModels[i].mean);
-        neg_means.row(i).copyTo(negMixtureModels[i].mean);
-        posMixtureModels[i].invCovariance = pos_covs[i].inv().diag().t();
-        negMixtureModels[i].invCovariance = neg_covs[i].inv().diag().t();
-        posMixtureModels[i].finalWeight = pos_weights.at<double>(i) / (pow(2*M_PI, 3.0/2.0) *  pow(cv::determinant(pos_covs[i]),0.5)) ;
-        negMixtureModels[i].finalWeight = neg_weights.at<double>(i) / (pow(2*M_PI, 3.0/2.0) *  pow(cv::determinant(neg_covs[i]),0.5)) ;
-    }
+  // resize the mixture vectors
+  posMixtureModels.resize(pos_weights.cols);
+  negMixtureModels.resize(neg_weights.cols);
+  // add the data to the mixture models
+  for(int i = 0; i < (int) pos_weights.cols; i++){
+    pos_means.row(i).copyTo(posMixtureModels[i].mean);
+    neg_means.row(i).copyTo(negMixtureModels[i].mean);
+    posMixtureModels[i].invCovariance = pos_covs[i].inv().diag().t();
+    negMixtureModels[i].invCovariance = neg_covs[i].inv().diag().t();
+    posMixtureModels[i].finalWeight = pos_weights.at<double>(i) / (pow(2*M_PI, 3.0/2.0) *  pow(cv::determinant(pos_covs[i]),0.5)) ;
+    negMixtureModels[i].finalWeight = neg_weights.at<double>(i) / (pow(2*M_PI, 3.0/2.0) *  pow(cv::determinant(neg_covs[i]),0.5)) ;
+  }
 
 
 }

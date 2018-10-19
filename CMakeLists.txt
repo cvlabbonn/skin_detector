@@ -27,7 +27,7 @@ endif(NOT Openni2_INCLUDE)
 
 set(Openni2_REDIST $ENV{OPENNI2_REDIST})
 if(NOT Openni2_REDIST)
-  message(FATAL_ERROR "Could not find OPENNI2_INCLUDE environment variable")
+  message(FATAL_ERROR "Could not find OPENNI2_REDIST environment variable")
 endif(NOT Openni2_REDIST)
 
 include_directories( ${Openni2_INCLUDE} )
