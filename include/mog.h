@@ -14,8 +14,8 @@ public:
     void train(std::vector<cv::Mat>& training_images , std::vector<cv::Mat> &masks);
     void test(std::vector<cv::Mat>& test_images);
     void test2(std::vector<cv::Mat>& test_images);
-    cv::EM* pos_model;
-    cv::EM* neg_model;
+    cv::Ptr<cv::ml::EM> neg_model;
+    cv::Ptr<cv::ml::EM> pos_model;
     std::vector<cv::Mat> test_result;
     std::vector<Mixture> posMixtureModels;
     std::vector<Mixture> negMixtureModels;
@@ -32,7 +32,7 @@ private:
                           const cv::Mat& mask,
                           std::vector<double> &pos_samples,
                           std::vector<double> &neg_samples );
-    void test_image(cv::Mat& img, cv::Mat& dst, cv::EM &model);
+    void test_image(cv::Mat& img, cv::Mat& dst, cv::Ptr<cv::ml::EM> model);
     void test_image2(cv::Mat& img, cv::Mat& dst);
     void compute_SkinnBinMap_4_Image( const cv::Mat &rgb, /*const cv::Mat &depth,*/ cv::Mat &result ,double threshold, bool skipInvalidDepthFLAG/*, bool printFLAG*/ );
     void compute_LogRatioMap_4_Image( const cv::Mat &rgb, /*const cv::Mat &depth,*/ cv::Mat &result/*, bool skipInvalidDepthFLAG*/);

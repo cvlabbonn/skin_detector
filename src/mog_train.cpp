@@ -11,8 +11,8 @@ void MOG::train( std::vector<cv::Mat>& training_images, std::vector<cv::Mat>& ma
 
     std::cout << "Training the models, this may take a while" << std::endl;
     // train the models
-    pos_model->train( pos_samples );
-    neg_model->train( neg_samples );
+    pos_model->trainEM( pos_samples );
+    neg_model->trainEM( neg_samples );
 
     emToMixture();
     std::cout << "Finished training the models" << std::endl;
